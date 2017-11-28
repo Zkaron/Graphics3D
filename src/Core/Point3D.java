@@ -2,15 +2,16 @@ package Core;
 
 import java.awt.*;
 
-public class Point3D extends Point {
-    private int z;
+public class Point3D {
+    public double x;
+    public double y;
+    public double z;
 
     /**
      * Constructs and initializes a point at the origin (0, 0, 0) of the coordinate space.
      */
     public Point3D() {
-        super();
-        z = 0;
+        setLocation(0, 0, 0);
     }
 
     /**
@@ -20,21 +21,39 @@ public class Point3D extends Point {
      * @param z the Z coordinate of the newly constructed Point
      */
     public Point3D(int x, int y, int z) {
-        super(x, y);
-        this.z = z;
+        setLocation(x, y, z);
+    }
+
+    public Point3D(double x, double y, double z) {
+        setLocation(x, y, z);
     }
 
     public Point3D(Point3D p) {
-        super(p.x, p.y);
-        this.z = p.z;
+        setLocation(p.x, p.y, p.z);
     }
 
     /**
-     * Returns the Z coordinate of this Point3D in double precision.
+     * Returns the X coordinate of this Point3D as integer.
+     * @return the X coordinate of this Point3D.
+     */
+    public int getX() {
+        return (int)Math.round(x);
+    }
+
+    /**
+     * Returns the Y coordinate of this Point3D as integer.
+     * @return the Y coordinate of this Point3D.
+     */
+    public int getY() {
+        return (int)Math.round(y);
+    }
+
+    /**
+     * Returns the Z coordinate of this Point3D as integer.
      * @return the Z coordinate of this Point3D.
      */
-    public double getZ() {
-        return z;
+    public int getZ() {
+        return (int)Math.round(z);
     }
 
     /**
@@ -59,17 +78,16 @@ public class Point3D extends Point {
     }
 
     /**
-     * Sets the location of this point to the specified double coordinates. The double values will be rounded to integer values.
-     * Any number smaller than Integer.MIN_VALUE will be reset to MIN_VALUE, and any number larger than Integer.MAX_VALUE will be reset to MAX_VALUE.
+     * Sets the location of this point to the specified double coordinates.
      *
      * @param x the X coordinate of the new location
      * @param y the Y coordinate of the new location
      * @param z the Z coordinate of the new location
      */
     public void setLocation(double x, double y, double z) {
-        this.x = (int)Math.round(x);
-        this.y = (int)Math.round(y);
-        this.z = (int)Math.round(z);
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     /**

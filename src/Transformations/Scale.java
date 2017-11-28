@@ -1,5 +1,6 @@
 package Transformations;
 
+import Core.Point3D;
 import Figures.*;
 import Lines.AbstractLine;
 import Lines.BresenhamLine;
@@ -17,25 +18,18 @@ public class Scale {
     }
 
     /**
-     * For lines and rectangles
+     * For two points
      * @param p0
      * @param p1
      * @return
      */
-    public LinkedList<Point> scale(Point p0, Point p1, double scaleWidth, double scaleHeight) {
-        LinkedList<Point> scaledPoint = new LinkedList<>();
+    public LinkedList<Point3D> scale(Point3D p0, Point3D p1, double scaleWidth, double scaleHeight, double scaleDepth) {
+        LinkedList<Point3D> scaledPoint = new LinkedList<>();
         if(scaleWidth != 1 || scaleHeight != 1) {
-            int startX = p0.x < p1.x ? p0.x : p1.x;
-            int startY = p0.y < p1.y ? p0.y : p1.y;
-
-            p0 = new Point((int)Math.round(p0.x * scaleWidth),(int)Math.round(p0.y * scaleHeight));
-            p1 = new Point((int)Math.round(p1.x * scaleWidth), (int)Math.round(p1.y * scaleHeight));
-
-//            p0.x += startX;
-//            p0.y += startY;
-//            p1.x += startX;
-//            p1.y += startY;
+            p0 = new Point3D(p0.x * scaleWidth, p0.y * scaleHeight, p0.z * scaleDepth);
+            p1 = new Point3D(p1.x * scaleWidth, p1.y * scaleHeight, p1.z * scaleDepth);
         }
+
         scaledPoint.add(p0);
         scaledPoint.add(p1);
         return scaledPoint;
@@ -46,11 +40,12 @@ public class Scale {
      * @param point
      * @param scaleRatioX
      * @param scaleRatioY
+     * @param scaleRatioZ
      * @return
      */
-    public Point scale(Point point, double scaleRatioX, double scaleRatioY) {
-        Point scaledPoint = new Point(point);
-        scaledPoint.setLocation(point.x * scaleRatioX, point.y * scaleRatioY);
+    public Point3D scale(Point3D point, double scaleRatioX, double scaleRatioY, double scaleRatioZ) {
+        Point3D scaledPoint = new Point3D(point);
+        scaledPoint.setLocation(point.x * scaleRatioX, point.y * scaleRatioY, point.z * scaleRatioZ);
         return scaledPoint;
     }
 }

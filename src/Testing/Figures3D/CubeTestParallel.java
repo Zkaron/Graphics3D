@@ -1,24 +1,23 @@
-package Testing.Figures;
+package Testing.Figures3D;
 
 import Core.MyJFrame;
+import Core.Point3D;
 import Figures.Rectangle;
-import Lines.AbstractLine;
+import Figures3D.Cube;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-/**
- * Created by Erik on 7/6/2017.
- */
-public class RectangleTest extends MyJFrame {
-    private final String FRAME_TITLE = "Rectangle";
+public class CubeTestParallel extends MyJFrame {
+    private final String FRAME_TITLE = "Cube";
     private JPanel panel;
     private BufferedImage buffImage;
     private Rectangle fillRect;
-    private Rectangle rect;
+    private Cube[] cube;
+    private Point3D adjusment;
 
-    public RectangleTest() {
+    public CubeTestParallel() {
         setTitle(FRAME_TITLE);
         panel = new JPanel();
         add(panel);
@@ -29,22 +28,25 @@ public class RectangleTest extends MyJFrame {
         fillRect = new Rectangle(panel, g2);
         fillRect.setColor(panel.getBackground());
         fillRect.fillRectangle(new Point(0, 0), new Point(panel.getWidth(), panel.getHeight()));
-        //g2.setColor(panel.getBackground());
-        //g2.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-        rect = new Rectangle(panel, g2);
+
+        adjusment = new Point3D(0, 0, 2);
+        cube = new Cube[2];
+        for(int i = 0; i < cube.length; i++) {
+            cube[i] = new Cube(g2);
+            cube[i].setPerspectiveType("parallel");
+            cube[i].setPerspectiveAdjustment(adjusment);
+        }
 
     }
 
     public void drawSomethingCool() {
-        rect.drawRectangle(new Point(150, 50), new Point(200, 100));
-        rect.drawRectangle(new Point(30, 50), new Point(150, 400));
-        rect.drawRectangle(new Point(80, 60), new Point(60, 240));
-        rect.fillRectangle(new Point(300, 100), new Point(400, 500));
+        cube[0].drawCube(new Point3D(300, 250, 100), new Point3D(350, 500, 200), Cube.DEFAULT_ASPECT_RATIO);
+        cube[1].drawCube(new Point3D(350, 150, 50), new Point3D(500, 100, 100), Cube.DEFAULT_ASPECT_RATIO);
         panel.getGraphics().drawImage(buffImage, 0, 0, panel);
     }
 
     public static void main(String[] args) {
-        RectangleTest test = new RectangleTest();
+        CubeTestParallel test = new CubeTestParallel();
         test.drawSomethingCool();
     }
 }

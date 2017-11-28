@@ -49,7 +49,7 @@ public class ExplicitClipTest extends MyJFrame {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 pressedPoint = new Point(e.getPoint());
-                System.out.print("p0[" + e.getX() + ", " + e.getY() + "]  ");
+                System.out.print("p0_2D[" + e.getX() + ", " + e.getY() + "]  ");
             }
 
             @Override
@@ -65,21 +65,21 @@ public class ExplicitClipTest extends MyJFrame {
                 } else {
                     releasedPoint = new Point(e.getPoint());
                     setClipArea(pressedPoint, releasedPoint);
-                    System.out.println("p1[" + e.getX() + ", " + e.getY() + "]");
+                    System.out.println("p1_2D[" + e.getX() + ", " + e.getY() + "]");
                 }
             }
         });
     }
 
-    public void drawSomethingCool() {
-        line.setLineWidth(5);
-        for(int p0 = 0, p1 = 1; p1 < linePointsVector.size(); p0 += 2, p1 += 2){
-            line.drawLine(linePointsVector.get(p0), linePointsVector.get(p1));
-        }
-        for(int p0 = 0, p1 = 1; p1 < rectanglePointsVector.size(); p0 += 2, p1 += 2){
-            rect.drawRectangle(rectanglePointsVector.get(p0), rectanglePointsVector.get(p1));
-        }
-    }
+//    public void drawSomethingCool() {
+//        line.setLineWidth(5);
+//        for(int p0 = 0, p1 = 1; p1 < linePointsVector.size(); p0 += 2, p1 += 2){
+//            line.drawLine(linePointsVector.get(p0), linePointsVector.get(p1));
+//        }
+//        for(int p0 = 0, p1 = 1; p1 < rectanglePointsVector.size(); p0 += 2, p1 += 2){
+//            rect.drawRectangle(rectanglePointsVector.get(p0), rectanglePointsVector.get(p1));
+//        }
+//    }
 
     public void setCoolPoints() {
         linePointsVector.add(new Point(100, 50));
@@ -128,7 +128,7 @@ public class ExplicitClipTest extends MyJFrame {
         clear(offGraphics);
         line.setGraphics(offGraphics);
         rect.setGraphics(offGraphics);
-        drawSomethingCool();
+//        drawSomethingCool();
         Graphics panelGraphics = panel.getGraphics();
         panelGraphics.drawImage(offScreen, 0, 0, panel);
     }

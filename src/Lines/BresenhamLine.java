@@ -2,8 +2,6 @@ package Lines;
 
 import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by erik on 4/2/17.
@@ -19,19 +17,16 @@ public class BresenhamLine extends AbstractLine {
      */
     public BresenhamLine(Container context) {
         super();
-        pixel.setContext(context);
         pixel.setGraphics(context.getGraphics());
     }
 
     /**
      * Constructor used for full control of the drawing mode
      * (for example double buffering)
-     * @param context the container to use
      * @param graphics the container's graphics
      */
-    public BresenhamLine(Container context, Graphics graphics) {
+    public BresenhamLine(Graphics graphics) {
         super();
-        pixel.setContext(context);
         pixel.setGraphics(graphics);
     }
 
@@ -42,16 +37,16 @@ public class BresenhamLine extends AbstractLine {
      */
     @Override
     public void drawingMethod() {
-        int x0 = (int)Math.round(p0.getX());
-        int y0 = (int)Math.round(p0.getY());
-        int x1 = (int)Math.round(p1.getX());
-        int y1 = (int)Math.round(p1.getY());
+        int x0 = (int)Math.round(p0_2D.getX());
+        int y0 = (int)Math.round(p0_2D.getY());
+        int x1 = (int)Math.round(p1_2D.getX());
+        int y1 = (int)Math.round(p1_2D.getY());
 
         int dx = (x1 - x0) < 0 ? (x0 - x1) : (x1 - x0);
         int dy = (y1 - y0) < 0 ? (y0 - y1) : (y1 - y0);
 
-        int xinc = (p0.getX() < p1.getX()) ? 1 : -1;
-        int yinc = (p0.getY() < p1.getY()) ? 1 : -1;
+        int xinc = (p0_2D.getX() < p1_2D.getX()) ? 1 : -1;
+        int yinc = (p0_2D.getY() < p1_2D.getY()) ? 1 : -1;
 
         drawWithWidth(x0, y0);
 

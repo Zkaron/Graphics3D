@@ -1,8 +1,7 @@
 package Figures;
 
 import Core.Pixel;
-import Lines.AbstractLine;
-import Transformations.Scale;
+import Transformations.Transformation;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -83,10 +82,10 @@ public abstract class AbstractCircle {
 
     protected void scale() {
         LinkedList<Point> scaledPoints;
-        Scale scale = new Scale();
-        scaledPoints = scale.scale(pc, radius, scaleWidth, scaleHeight);
-        pc = scaledPoints.getFirst();
-        radius = scaledPoints.getLast();
+        Transformation scale = new Transformation();
+//        scaledPoints = scale.scale(pc, radius, scaleWidth, scaleHeight);
+//        pc = scaledPoints.getFirst();
+//        radius = scaledPoints.getLast();
     }
 
     public void setScale(double width, double height) {

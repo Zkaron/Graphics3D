@@ -3,9 +3,7 @@ package Figures3D;
 import Core.Point3D;
 import Lines.AbstractLine;
 import Lines.BresenhamLine;
-import Projection.PerspectiveProjection;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 public class Cube {
 
     public static final double DEFAULT_ASPECT_RATIO = 20;
-    private ArrayList<Point3D> point3DArrayList;
+    public ArrayList<Point3D> point3DArrayList;
 
     private ArrayList<ArrayList<Point3D>> face3DArrayList;
 
@@ -44,50 +42,90 @@ public class Cube {
      * @param ASPECT_RATIO_UNIT the aspect-ratio to use on the cube
      */
     public void drawCube(Point3D p0, Point3D p1, final double ASPECT_RATIO_UNIT) {
-        /*
-        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p0.getZ()), new Point3D(p1.getX(), p0.getY(), p0.getZ()));
-        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p0.getZ()), new Point3D(p0.getX(), p1.getY(), p0.getZ()));
-        line3D.drawLine3D(new Point3D(p0.getX(), p1.getY(), p0.getZ()), new Point3D(p1.getX(), p1.getY(), p0.getZ()));
-        line3D.drawLine3D(new Point3D(p1.getX(), p0.getY(), p0.getZ()), new Point3D(p1.getX(), p1.getY(), p0.getZ()));
 
-        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p1.getZ()), new Point3D(p1.getX(), p0.getY(), p1.getZ()));
-        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p1.getZ()), new Point3D(p0.getX(), p1.getY(), p1.getZ()));
-        line3D.drawLine3D(new Point3D(p0.getX(), p1.getY(), p1.getZ()), new Point3D(p1.getX(), p1.getY(), p1.getZ()));
-        line3D.drawLine3D(new Point3D(p1.getX(), p0.getY(), p1.getZ()), new Point3D(p1.getX(), p1.getY(), p1.getZ()));
-
-        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p0.getZ()), new Point3D(p0.getX(), p0.getY(), p1.getZ()));
-        line3D.drawLine3D(new Point3D(p1.getX(), p0.getY(), p0.getZ()), new Point3D(p1.getX(), p0.getY(), p1.getZ()));
-        line3D.drawLine3D(new Point3D(p0.getX(), p1.getY(), p0.getZ()), new Point3D(p0.getX(), p1.getY(), p1.getZ()));
-        line3D.drawLine3D(new Point3D(p1.getX(), p1.getY(), p0.getZ()), new Point3D(p1.getX(), p1.getY(), p1.getZ()));
-        */
-        /*modelCube(p0, p1, ASPECT_RATIO_UNIT);
-        for(int i = 0; i < point3DArrayList.size() - 2; i++) {
-            line3D.drawLine3D(point3DArrayList.get(i), point3DArrayList.get(i + 1));
-        }*/
+//        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p0.getZ()), new Point3D(p1.getX(), p0.getY(), p0.getZ()));
+//        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p0.getZ()), new Point3D(p0.getX(), p1.getY(), p0.getZ()));
+//        line3D.drawLine3D(new Point3D(p0.getX(), p1.getY(), p0.getZ()), new Point3D(p1.getX(), p1.getY(), p0.getZ()));
+//        line3D.drawLine3D(new Point3D(p1.getX(), p0.getY(), p0.getZ()), new Point3D(p1.getX(), p1.getY(), p0.getZ()));
+//
+//        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p1.getZ()), new Point3D(p1.getX(), p0.getY(), p1.getZ()));
+//        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p1.getZ()), new Point3D(p0.getX(), p1.getY(), p1.getZ()));
+//        line3D.drawLine3D(new Point3D(p0.getX(), p1.getY(), p1.getZ()), new Point3D(p1.getX(), p1.getY(), p1.getZ()));
+//        line3D.drawLine3D(new Point3D(p1.getX(), p0.getY(), p1.getZ()), new Point3D(p1.getX(), p1.getY(), p1.getZ()));
+//
+//        line3D.drawLine3D(new Point3D(p0.getX(), p0.getY(), p0.getZ()), new Point3D(p0.getX(), p0.getY(), p1.getZ()));
+//        line3D.drawLine3D(new Point3D(p1.getX(), p0.getY(), p0.getZ()), new Point3D(p1.getX(), p0.getY(), p1.getZ()));
+//        line3D.drawLine3D(new Point3D(p0.getX(), p1.getY(), p0.getZ()), new Point3D(p0.getX(), p1.getY(), p1.getZ()));
+//        line3D.drawLine3D(new Point3D(p1.getX(), p1.getY(), p0.getZ()), new Point3D(p1.getX(), p1.getY(), p1.getZ()));
+//
+//        modelCube(p0, p1, ASPECT_RATIO_UNIT);
+//        for(int i = 0; i < point3DArrayList.size() - 2; i++) {
+//            line3D.drawLine3D(point3DArrayList.get(i), point3DArrayList.get(i + 1));
+//        }
         modelCube(p0, p1, ASPECT_RATIO_UNIT);
-        drawFaces();
+        drawModeledCube();
+//        drawFaces();
     }
 
-    public void drawCube() {
-        drawFaces();
-    }
+//    public void drawCube() {
+//        drawFaces();
+//    }
 
     public void modelCube(Point3D p0, Point3D p1, final double ASPECT_RATIO_UNIT) {
-        /*point3DArrayList.add(new Point3D(p0.getX(), p0.getY(), p0.getZ()));
-        point3DArrayList.add(new Point3D(p1.getX(), p0.getY(), p0.getZ()));
-        point3DArrayList.add(new Point3D(p0.getX(), p1.getY(), p0.getZ()));
-        point3DArrayList.add(new Point3D(p0.getX(), p0.getY(), p1.getZ()));
-        point3DArrayList.add(new Point3D(p1.getX(), p1.getY(), p0.getZ()));
-        point3DArrayList.add(new Point3D(p0.getX(), p1.getY(), p1.getZ()));
-        point3DArrayList.add(new Point3D(p1.getX(), p0.getY(), p1.getZ()));
-        point3DArrayList.add(new Point3D(p1.getX(), p1.getY(), p1.getZ()));*/
-        modelFaces(p0, p1, ASPECT_RATIO_UNIT);
+//        point3DArrayList.add(new Point3D(p0.getX(), p0.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p0.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p0.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p1.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p1.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p1.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p0.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p1.getY(), p0.getZ()));
+//
+//        point3DArrayList.add(new Point3D(p0.getX(), p0.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p0.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p0.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p1.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p1.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p1.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p0.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p1.getY(), p1.getZ()));
+//
+//        point3DArrayList.add(new Point3D(p0.getX(), p0.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p0.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p0.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p0.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p1.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p0.getX(), p1.getY(), p1.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p1.getY(), p0.getZ()));
+//        point3DArrayList.add(new Point3D(p1.getX(), p1.getY(), p1.getZ()));
+
+        point3DArrayList.add(new Point3D(p0.x, p0.y, p0.z));
+        point3DArrayList.add(new Point3D(p0.x, p0.y + ASPECT_RATIO_UNIT, p0.z));
+        point3DArrayList.add(new Point3D(p0.x + ASPECT_RATIO_UNIT, p0.y, p0.z));
+        point3DArrayList.add(new Point3D(p0.x + ASPECT_RATIO_UNIT, p0.y + ASPECT_RATIO_UNIT, p0.z));
+
+        point3DArrayList.add(new Point3D(p0.x + ASPECT_RATIO_UNIT, p0.y + ASPECT_RATIO_UNIT, p0.z + ASPECT_RATIO_UNIT));
+        point3DArrayList.add(new Point3D(p0.x + ASPECT_RATIO_UNIT, p0.y, p0.z + ASPECT_RATIO_UNIT));
+        point3DArrayList.add(new Point3D(p0.x, p0.y + ASPECT_RATIO_UNIT, p0.z + ASPECT_RATIO_UNIT));
+        point3DArrayList.add(new Point3D(p0.x, p0.y, p0.z + ASPECT_RATIO_UNIT));
+
+
+//        point3DArrayList.add(new Point3D(p1.x, p1.y, p1.z));
+//        point3DArrayList.add(new Point3D(p1.x, p1.y - ASPECT_RATIO_UNIT, p1.z));
+//        point3DArrayList.add(new Point3D(p1.x - ASPECT_RATIO_UNIT, p1.y, p1.z));
+//        point3DArrayList.add(new Point3D(p1.x - ASPECT_RATIO_UNIT, p1.y - ASPECT_RATIO_UNIT, p1.z));
+
+        //Draws from point3DArrayList (All significant points)
+//        for(int i = 0; i <= point3DArrayList.size() - 2; i+=2) {
+//            line3D.drawLine3D(point3DArrayList.get(i), point3DArrayList.get(i + 1));
+//        }
+
+//        modelFaces(p0, p1, ASPECT_RATIO_UNIT);
 
         /*point3DArrayList.sort(new ComparatorPoint3D());*/
     }
 
     private void modelFaces(Point3D p0, Point3D p1, final double ASPECT_RATIO_UNIT) {
-        double zPosition = p0.z;
         //Face 1
         ArrayList<Point3D> face3D = new ArrayList<>();
 
@@ -128,7 +166,24 @@ public class Cube {
         face3DArrayList.add(face3D);
     }
 
+    public void drawModeledCube() {
+        //Draws from point3DArrayList (All significant points)
+        line3D.drawLine3D(point3DArrayList.get(0),point3DArrayList.get(1));
+        line3D.drawLine3D(point3DArrayList.get(0),point3DArrayList.get(2));
+        line3D.drawLine3D(point3DArrayList.get(0),point3DArrayList.get(7));
+        line3D.drawLine3D(point3DArrayList.get(1),point3DArrayList.get(3));
+        line3D.drawLine3D(point3DArrayList.get(1),point3DArrayList.get(6));
+        line3D.drawLine3D(point3DArrayList.get(2),point3DArrayList.get(3));
+        line3D.drawLine3D(point3DArrayList.get(2),point3DArrayList.get(5));
+        line3D.drawLine3D(point3DArrayList.get(3),point3DArrayList.get(4));
+        line3D.drawLine3D(point3DArrayList.get(4),point3DArrayList.get(5));
+        line3D.drawLine3D(point3DArrayList.get(4),point3DArrayList.get(6));
+        line3D.drawLine3D(point3DArrayList.get(5),point3DArrayList.get(7));
+        line3D.drawLine3D(point3DArrayList.get(6),point3DArrayList.get(7));
+    }
+
     private void drawFaces() {
+        //Draws from face3DArrayList
         for(int i = 0; i < face3DArrayList.size(); i++) {
             for(int j = 0; j < face3DArrayList.get(i).size() - 1; j += 2) {
                 Point3D p0 = new Point3D(face3DArrayList.get(i).get(j));

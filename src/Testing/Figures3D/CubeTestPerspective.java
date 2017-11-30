@@ -32,7 +32,7 @@ public class CubeTestPerspective extends MyJFrame {
         fillRect.setColor(panel.getBackground());
         fillRect.fillRectangle(new Point(0, 0), new Point(panel.getWidth(), panel.getHeight()));
 
-        adjusment = new Point3D(-1070, -1070, -1070);
+        adjusment = new Point3D(-60, -40,-80);
         cube = new Cube[2];
         for(int i = 0; i < cube.length; i++) {
             cube[i] = new Cube(g2);
@@ -43,8 +43,8 @@ public class CubeTestPerspective extends MyJFrame {
     }
 
     public void drawSomethingCool() {
-        cube[0].drawCube(new Point3D(300, 250, 100), new Point3D(350, 500, 200), Cube.DEFAULT_ASPECT_RATIO);
-        cube[1].drawCube(new Point3D(350, 150, 50), new Point3D(500, 100, 100), Cube.DEFAULT_ASPECT_RATIO);
+        cube[0].drawCube(new Point3D(500, 500, 100), new Point3D(150, 200, 100), 500);
+//        cube[1].drawCube(new Point3D(250, 250, 50), new Point3D(300, 200, 100), 150);
         panel.getGraphics().drawImage(buffImage, 0, 0, panel);
     }
 

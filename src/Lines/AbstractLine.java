@@ -9,7 +9,6 @@ import Core.Point3D;
 import Projection.PerspectiveProjection;
 import Projection.ParallelProjection;
 import Projection.Projection;
-import Transformations.Scale;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -62,8 +61,15 @@ public abstract class AbstractLine {
 
         //set clip area according to view volume
 
-        //Scale the points before drawing
-        scale();
+        //---Transform the points before drawing---//
+        //First translate
+
+        //Then scale
+        //scale();
+
+        //Finally Rotate
+
+        //---  ---//
 
         //Project to the plane
         project();
@@ -95,7 +101,7 @@ public abstract class AbstractLine {
         this.p0_2D = new Point(p0);
         this.p1_2D = new Point(p1);
 
-       //Scale the points before drawing, not needed anymore as already scaled in 3D
+       //Transformation the points before drawing, not needed anymore as already scaled in 3D
 //        scale();
 
         //Obtain the pendent
@@ -222,13 +228,13 @@ public abstract class AbstractLine {
         }
     }
 
-    protected void scale() {
-        LinkedList<Point3D> scaledPoints;
-        Scale scale = new Scale();
-        scaledPoints = scale.scale(p0_3D, p1_3D, scaleWidth, scaleHeight, scaleDetph);
-        p0_3D = scaledPoints.getFirst();
-        p1_3D = scaledPoints.getLast();
-    }
+//    protected void scale() {
+//        LinkedList<Point3D> scaledPoints;
+//        Transformation scale = new Transformation();
+//        scaledPoints = scale.scale(p0_3D, p1_3D, scaleWidth, scaleHeight, scaleDetph);
+//        p0_3D = scaledPoints.getFirst();
+//        p1_3D = scaledPoints.getLast();
+//    }
 
     protected void project() {
         LinkedList<Point> projectedPoints;

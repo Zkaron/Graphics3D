@@ -65,7 +65,7 @@ public class PerspectiveProjection implements Projection {
 
     /**
      * Used when you want to set a new focal point to
-     * the perspective
+     * the perspectivep1.y - centerPoint.y) / (p1.z - centerPoint.z)
      * @param p0 the origin 3D point
      * @param p1 the destine 3D point
      * @param cp the focal(center) 3D point
@@ -76,14 +76,14 @@ public class PerspectiveProjection implements Projection {
         centerPoint = new Point3D(cp);
         LinkedList<Point> v = new LinkedList<>();
 
-        x0 = centerPoint.x -  centerPoint.z * (p0.x - centerPoint.x) / (p0.z - centerPoint.z);
-        y0 = centerPoint.y -  centerPoint.z * (p0.y - centerPoint.y) / (p0.z - centerPoint.z);
+        x0 = centerPoint.x - (centerPoint.z * (p0.x - centerPoint.x) / (p0.z - centerPoint.z));
+        y0 = centerPoint.y - (centerPoint.z * (p0.y - centerPoint.y) / (p0.z - centerPoint.z));
         Point point0 = new Point();
         point0.setLocation(x0, y0);
         v.add(point0);
 
-        x1 = centerPoint.x -  centerPoint.z * (p1.x - centerPoint.x) / (p1.z - centerPoint.z);
-        y1 = centerPoint.y -  centerPoint.z * (p1.y - centerPoint.y) / (p1.z - centerPoint.z);
+        x1 = centerPoint.x - (centerPoint.z * (p1.x - centerPoint.x) / (p1.z - centerPoint.z));
+        y1 = centerPoint.y - (centerPoint.z * (p1.y - centerPoint.y) / (p1.z - centerPoint.z));
         Point point1 = new Point();
         point1.setLocation(x1, y1);
         v.add(point1);

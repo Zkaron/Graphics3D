@@ -1,75 +1,63 @@
 package Testing.Transformations;
 
 import Core.MyJFrame;
-import Lines.AbstractLine;
-import Lines.BasicLine;
-import Testing.Lines.BasicLineTest;
+import Core.Point3D;
+import Figures.Rectangle;
+import Figures3D.Cube;
+import Transformations.Transformation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-/**
- * Created by Erik on 9/22/2017.
- */
 public class ScaleTest extends MyJFrame {
-    private final String FRAME_TITLE = "Scale";
+    private final String FRAME_TITLE = "Cube scaled";
     private JPanel panel;
-    private BufferedImage offScreen;
-    private AbstractLine line;
-    private int imageWidth;
-    private int imageHeight;
+    private BufferedImage buffImage;
+    private Rectangle fillRect;
+    private Cube[] cube;
+    private Point3D adjusment;
+    private Transformation scalation;
 
     public ScaleTest() {
         setTitle(FRAME_TITLE);
         panel = new JPanel();
         add(panel);
         this.setVisible(true);  //is set visible again because a new element has been added
+
+        buffImage = new BufferedImage(panel.getWidth(), panel.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics g2 = buffImage.createGraphics();
+        fillRect = new Rectangle(panel, g2);
+        fillRect.setColor(panel.getBackground());
+        fillRect.fillRectangle(new Point(0, 0), new Point(panel.getWidth(), panel.getHeight()));
+
+        adjusment = new Point3D(-60, -40,-80);
+        cube = new Cube[2];
+        for(int i = 0; i < cube.length; i++) {
+            cube[i] = new Cube(g2);
+            cube[i].setPerspectiveType("perspective");
+            cube[i].setPerspectiveAdjustment(adjusment);
+        }
+        scalation = new Transformation();
+
     }
 
     public void drawSomethingCool() {
-        double scaleX = 0.5, scaleY = 0.5;
-        line.setScale(scaleX, scaleY);
-        line.drawLine(new Point(100, 50), new Point(50, 100));
-        line.drawLine(new Point(150, 50), new Point(200, 100));
-        line.drawLine(new Point(100, 200),new Point( 50, 200));
-        line.drawLine(new Point(150, 200),new Point( 200, 200));
-        line.drawLine(new Point(100, 300),new Point( 100, 350));
-        line.drawLine(new Point(200, 350),new Point( 200, 300));
+        //cube[0].drawCube(new Point3D(300, 250, 100), new Point3D(350, 500, 200), Cube.DEFAULT_ASPECT_RATIO);
+
+        cube[1].modelCube(new Point3D(300, 250, 100), new Point3D(350, 500, 200), 100);
+        ArrayList<Point3D> scaledPoints;
+        Point3D scaleRatio = new Point3D(4, 5, 1);
+        scaledPoints = scalation.scale(cube[1].point3DArrayList, scaleRatio);
+        cube[1].setPoint3DArrayList(scaledPoints);
+        cube[1].drawModeledCube();
+
+        panel.getGraphics().drawImage(buffImage, 0, 0, panel);
     }
-
-    public void paint() {
-        Dimension d = panel.getSize();
-        if((offScreen == null) || (d.width != imageWidth)
-                ||(d.height != imageHeight)) {
-            if(d.width < 1 || d.height < 1) return;
-
-            offScreen = new BufferedImage(panel.getWidth(),
-                    panel.getHeight(), BufferedImage.TYPE_INT_RGB);
-            imageWidth = d.width;
-            imageHeight = d.height;
-            line = new BasicLine(panel);
-        }   //check if the screen hasn't been drawn or the window was resided
-
-        Graphics offGraphics = offScreen.createGraphics();
-        clear(offGraphics);
-        line.setGraphics(offGraphics);
-        drawSomethingCool();
-        Graphics panelGraphics = panel.getGraphics();
-        panelGraphics.drawImage(offScreen, 0, 0, panel);
-    }
-
-    public void paint(Graphics g) {
-        paint();
-    }
-
-    private void clear(Graphics g) {
-        g.setColor(panel.getBackground());
-        g.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-    }
-
 
     public static void main(String[] args) {
         ScaleTest test = new ScaleTest();
+        test.drawSomethingCool();
     }
 }

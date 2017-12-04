@@ -78,6 +78,18 @@ public abstract class AbstractLine {
         drawLine();
     }
 
+    public void drawLine3D(Point3D p0, Point3D p1, double aspect_ratio) {
+        //assign primitives from 3D space
+        this.p0_3D = new Point3D(p0.x * aspect_ratio, p0.y * aspect_ratio, p0.z * aspect_ratio);
+        this.p1_3D = new Point3D(p1.x * aspect_ratio, p1.y * aspect_ratio, p1.z * aspect_ratio);
+
+        //Project to the plane
+        project();
+
+        //draw the line in a 2D space
+        drawLine();
+    }
+
     /**
      * Makes all the operations to draw a 2D line, from obtaining the pendent
      * to using a line algorithm to calculate the coordinates of each pixel

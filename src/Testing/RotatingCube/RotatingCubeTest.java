@@ -11,7 +11,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class RotatingCubeTest extends MyJFrame implements KeyListener {
     private final String FRAME_TITLE = "Rotating cube";
@@ -24,7 +23,6 @@ public class RotatingCubeTest extends MyJFrame implements KeyListener {
     private Transformation transformation;
     private final String[] transformationKeys= {"translation", "scalation", "rotation"};
     private String transformKeySelected;
-    private int axisKeySelected;
 
     public RotatingCubeTest() {
         setTitle(FRAME_TITLE);
@@ -48,8 +46,6 @@ public class RotatingCubeTest extends MyJFrame implements KeyListener {
         transformation = new Transformation();
 
         transformKeySelected = transformationKeys[0];
-        axisKeySelected = KeyEvent.VK_X;
-
     }
 
     public void drawSomethingCool() {
